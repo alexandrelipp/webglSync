@@ -55,9 +55,11 @@ found in the LICENSE.txt file.
         shouldBeNonNull("sync");
         shouldBe("gl.getError()", "gl.NO_ERROR");
         gl.clientWaitSync(sync, 0, max);
-        shouldBe("gl.getError()", "gl.NO_ERROR");
-        gl.clientWaitSync(sync, 0, max + 1);
-        shouldBe("gl.getError()", "gl.INVALID_OPERATION");
+        //gl.clientWaitSync(sync, 0, max);
+
+        //shouldBe("gl.getError()", "gl.NO_ERROR");
+        // gl.clientWaitSync(sync, 0, max + 1);
+        //shouldBe("gl.getError()", "gl.INVALID_OPERATION");
 
         requestAnimationFrame(runGetSyncParameterTest);
     }
