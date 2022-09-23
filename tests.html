@@ -32,7 +32,10 @@ found in the LICENSE.txt file.
     if (!gl) {
         testFailed("context does not exist");
         finishTest();
-    } else {
+    }else if(true){
+        requestAnimationFrame(firefoxNoWarnings);
+    }
+    else {
         testPassed("context exists");
 
         debug("");
@@ -54,14 +57,19 @@ found in the LICENSE.txt file.
         sync = gl.fenceSync(gl.SYNC_GPU_COMMANDS_COMPLETE, 0);
         shouldBeNonNull("sync");
         shouldBe("gl.getError()", "gl.NO_ERROR");
-        gl.clientWaitSync(sync, 0, max);
+        //gl.clientWaitSync(sync, 0, max);
         //gl.clientWaitSync(sync, 0, max);
 
-        //shouldBe("gl.getError()", "gl.NO_ERROR");
-        // gl.clientWaitSync(sync, 0, max + 1);
-        //shouldBe("gl.getError()", "gl.INVALID_OPERATION");
+        shouldBe("gl.getError()", "gl.NO_ERROR");
+        gl.clientWaitSync(sync, 0, max + 1);
+        shouldBe("gl.getError()", "gl.INVALID_OPERATION");
 
         requestAnimationFrame(runGetSyncParameterTest);
+    }
+
+    function firefoxNoWarnings(){
+        sync = gl.fenceSync(gl.SYNC_GPU_COMMANDS_COMPLETE, 0);
+        gl.clientWaitSync(sync, 0, 0);
     }
 
     var numRetries = 20000;
